@@ -1,0 +1,15 @@
+node_modules/
+.next/
+out/
+dist/
+coverage/
+*.log
+.env*
+/reference/**
+*.har
+*.zip
+*.mp4
+*.mov
+*.png
+*.jpg
+*.jpeg

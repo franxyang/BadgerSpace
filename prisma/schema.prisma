@@ -1,0 +1,185 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum ReportStatus {
+  OPEN
+  RESOLVED
+  REJECTED
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  image     String?
+  role      Role     @default(USER)
+  reviews   Review[]
+  votes     Vote[]
+  reports   Report[] @relation("ReporterReports")
+  imports   ImportedCourse[]
+  createdAt DateTime @default(now())
+  accounts  Account[]
+  sessions  Session[]
+}
+
+model Department {
+  id      String   @id @default(cuid())
+  code    String   @unique
+  name    String
+  courses Course[]
+}
+
+model Course {
+  id           String             @id @default(cuid())
+  code         String             @unique
+  name         String
+  description  String?
+  credits      Int?
+  level        Int?
+  departmentId String
+  department   Department         @relation(fields: [departmentId], references: [id])
+  instructors  CourseInstructor[]
+  reviews      Review[]
+  createdAt    DateTime           @default(now())
+}
+
+model Instructor {
+  id      String             @id @default(cuid())
+  name    String
+  dept    String?
+  courses CourseInstructor[]
+  offerings OfferingInstructor[]
+}
+
+model CourseInstructor {
+  courseId     String
+  instructorId String
+  Course       Course     @relation(fields: [courseId], references: [id])
+  Instructor   Instructor @relation(fields: [instructorId], references: [id])
+  @@id([courseId, instructorId])
+}
+
+// Optional: store which terms a course is offered and who teaches it.
+model Offering {
+  id        String   @id @default(cuid())
+  courseId  String
+  term      String   // e.g. "2025-Fall|Winter|Spring|Summer"
+  section   String?
+  Course    Course   @relation(fields: [courseId], references: [id])
+  instructors OfferingInstructor[]
+  createdAt DateTime @default(now())
+  @@unique([courseId, term, section])
+}
+
+model OfferingInstructor {
+  offeringId   String
+  instructorId String
+  Offering     Offering   @relation(fields: [offeringId], references: [id])
+  Instructor   Instructor @relation(fields: [instructorId], references: [id])
+  @@id([offeringId, instructorId])
+}
+
+model Review {
+  id              String   @id @default(cuid())
+  userId          String
+  courseId        String
+  semester        String   // e.g. "2025-Fall|Winter|Spring|Summer"
+  instructorId    String?
+  ta              String?
+  content         String
+  ratingContent   Int
+  ratingTeaching  Int
+  ratingGrading   Int
+  ratingWorkload  Int
+  helpfulCount    Int      @default(0)
+  reported        Boolean  @default(false)
+  hidden          Boolean  @default(false)
+  moderationNote  String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  User            User     @relation(fields: [userId], references: [id])
+  Course          Course   @relation(fields: [courseId], references: [id])
+  Instructor      Instructor? @relation(fields: [instructorId], references: [id])
+  votes           Vote[]
+  reports         Report[]
+  @@unique([userId, courseId, semester])
+}
+
+model Vote {
+  userId   String
+  reviewId String
+  value    Int      // +1 or -1
+  User     User     @relation(fields: [userId], references: [id])
+  Review   Review   @relation(fields: [reviewId], references: [id])
+  @@id([userId, reviewId])
+}
+
+model Report {
+  id        String   @id @default(cuid())
+  reviewId  String
+  reporterId String
+  reason    String
+  status    ReportStatus @default(OPEN)
+  createdAt DateTime @default(now())
+  Review    Review   @relation(fields: [reviewId], references: [id])
+  Reporter  User     @relation("ReporterReports", fields: [reporterId], references: [id])
+}
+
+model ImportedCourse {
+  id        String   @id @default(cuid())
+  userId    String
+  courseId  String?
+  courseCode String
+  semester  String   // e.g. "2024-Spring"
+  createdAt DateTime @default(now())
+  User      User     @relation(fields: [userId], references: [id])
+  Course    Course?  @relation(fields: [courseId], references: [id])
+  @@unique([userId, courseCode, semester])
+}
+
+/// NextAuth Prisma Adapter models
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  User              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  User         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}

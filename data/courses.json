@@ -1,0 +1,104 @@
+[
+  {
+    "code": "MATH 221",
+    "name": "Calculus I",
+    "contentGrade": "B+",
+    "teachingGrade": "B",
+    "gradingGrade": "B",
+    "workloadGrade": "B",
+    "snippet": "Limits, derivatives, and applications to motion and optimization, with emphasis on problem-solving.",
+    "reviews": [
+      {
+        "semester": "Fall 2024",
+        "body": "Fair workload. Exams focused on conceptual understanding. Weekly quizzes.",
+        "ratings": {
+          "content": "B+",
+          "teaching": "B",
+          "grading": "B",
+          "workload": "B"
+        }
+      }
+    ]
+  },
+  {
+    "code": "CS 300",
+    "name": "Programming II",
+    "contentGrade": "A-",
+    "teachingGrade": "A-",
+    "gradingGrade": "B+",
+    "workloadGrade": "B+",
+    "snippet": "Data structures and object-oriented programming in Java. Projects emphasize design and testing."
+  },
+  {
+    "code": "ECON 101",
+    "name": "Principles of Microeconomics",
+    "contentGrade": "B+",
+    "teachingGrade": "B",
+    "gradingGrade": "B",
+    "workloadGrade": "B",
+    "snippet": "Supply, demand, and market structures. Lots of graphs; lectures recorded."
+  },
+  {
+    "code": "STAT 240",
+    "name": "Data Science Modeling I",
+    "contentGrade": "A-",
+    "teachingGrade": "A",
+    "gradingGrade": "B+",
+    "workloadGrade": "B",
+    "snippet": "Python-based introduction to data science and statistical modeling."
+  },
+  {
+    "code": "PHYSICS 207",
+    "name": "General Physics",
+    "contentGrade": "B",
+    "teachingGrade": "B",
+    "gradingGrade": "B",
+    "workloadGrade": "C",
+    "snippet": "Mechanics and waves with a calculus foundation; labs every week."
+  },
+  {
+    "code": "MATH 222",
+    "name": "Calculus II",
+    "contentGrade": "A-",
+    "teachingGrade": "B+",
+    "gradingGrade": "B+",
+    "workloadGrade": "B",
+    "snippet": "Integration techniques, sequences/series, polar/parametric curves."
+  },
+  {
+    "code": "COMP SCI 200",
+    "name": "Programming I",
+    "contentGrade": "A",
+    "teachingGrade": "A",
+    "gradingGrade": "A-",
+    "workloadGrade": "B",
+    "snippet": "Intro to programming concepts; language varies by instructor."
+  },
+  {
+    "code": "CHEM 103",
+    "name": "General Chemistry I",
+    "contentGrade": "B",
+    "teachingGrade": "B",
+    "gradingGrade": "B",
+    "workloadGrade": "B+",
+    "snippet": "Atoms, molecules, reactions, and stoichiometry. Heavy lab component."
+  },
+  {
+    "code": "LIS 461",
+    "name": "Data and Algorithms: Ethics & Policy",
+    "contentGrade": "A",
+    "teachingGrade": "A",
+    "gradingGrade": "A-",
+    "workloadGrade": "B",
+    "snippet": "Covers fairness, accountability, and transparency in algorithmic systems."
+  },
+  {
+    "code": "ECON 102",
+    "name": "Principles of Macroeconomics",
+    "contentGrade": "B+",
+    "teachingGrade": "B+",
+    "gradingGrade": "B",
+    "workloadGrade": "B",
+    "snippet": "National income, inflation, unemployment, fiscal and monetary policy."
+  }
+]

@@ -1,0 +1,44 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #fafafa;
+  --card: #ffffff;
+  --text: #1f2937;
+}
+html, body, #__next {
+  height: 100%;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+.container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+.card {
+  @apply bg-white rounded-2xl shadow-sm border border-gray-100;
+}
+.badge {
+  @apply inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ring-1 ring-inset;
+}
+.badge-green { @apply text-green-700 ring-green-600/20 bg-green-50; }
+.badge-amber { @apply text-amber-700 ring-amber-600/20 bg-amber-50; }
+.badge-blue { @apply text-blue-700 ring-blue-600/20 bg-blue-50; }
+
+/* Form + Button primitives used across pages */
+.input {
+  @apply w-full rounded-xl border border-gray-300 bg-white px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-uw-red/30 focus:border-uw-red disabled:opacity-50 disabled:cursor-not-allowed;
+}
+.app-btn {
+  @apply inline-flex items-center justify-center rounded-xl px-3 py-2 text-sm font-medium transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+.app-btn.blue { @apply bg-gray-900 text-white hover:bg-black focus:ring-gray-900; }
+.app-btn.gold { @apply bg-amber-500 text-white hover:bg-amber-600 focus:ring-amber-500; }
+.app-btn.gray { @apply bg-gray-100 text-gray-800 hover:bg-gray-200 focus:ring-gray-300; }
+.app-btn:disabled { @apply opacity-50 cursor-not-allowed; }
+
+/* Simple skeleton styles */
+.skeleton { @apply animate-pulse bg-gray-200 rounded-md; }
