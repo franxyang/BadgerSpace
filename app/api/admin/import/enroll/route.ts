@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { authOptions } from '@/lib/auth'
 import { parseEnrollJSON } from '@/lib/enroll-parser'
 import { upsertSchedule } from '@/lib/schedule'
 
@@ -55,4 +55,3 @@ export async function POST(req: Request) {
   const { offeringCount, instructorLinks } = await upsertSchedule(term, Array.from(dedup.values()))
   return NextResponse.json({ term, offerings: offeringCount, instructorsLinked: instructorLinks })
 }
-
