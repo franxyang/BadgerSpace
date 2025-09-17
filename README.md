@@ -3,7 +3,6 @@
 
 Next.js 14 + TailwindCSS app for UW–Madison course reviews. Inspired by HKUST Space, but with original content, UW styling, and UW-specific grading (A, AB, B, BC, C, D, F).
 
-> Respect trademarks & content: don’t copy HKUST assets/text. Use UW-themed styling only.
 
 ## Quickstart
 
