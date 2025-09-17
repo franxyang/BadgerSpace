@@ -20,6 +20,7 @@
     "seed:minimal": "tsx scripts/seed-minimal.ts",
     "admin:promote": "tsx scripts/promote-admin.ts"
   },
+  "postinstall": "prisma generate",
   "dependencies": {
     "next": "14.2.5",
     "react": "18.2.0",
@@ -44,5 +45,9 @@
     "@types/node": "20.14.9",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0"
+  }
+  ,
+  "engines": {
+    "node": ">=18"
   }
 }
