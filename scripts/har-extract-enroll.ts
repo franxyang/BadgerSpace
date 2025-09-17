@@ -47,7 +47,8 @@ async function main() {
   const har: Har = JSON.parse(raw)
   const entries = har.log?.entries || []
   let count = 0
-  for (const [i, e] of entries.entries()) {
+  for (let i = 0; i < entries.length; i++) {
+    const e = entries[i]
     const url = e.request?.url || ''
     if (!/public\.enroll\.wisc\.edu/i.test(url)) continue
     const c = e.response?.content
@@ -80,4 +81,3 @@ async function main() {
 main().finally(async () => {
   await prisma.$disconnect()
 })
-
