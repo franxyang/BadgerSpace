@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getServerSession } from 'next-auth'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { authOptions } from '@/lib/auth'
 import { updateReviewSchema } from '@/lib/validators'
 
 export async function PATCH(req: Request, { params }: { params: { id: string } }) {
@@ -19,4 +19,3 @@ export async function PATCH(req: Request, { params }: { params: { id: string } }
   const updated = await prisma.review.update({ where: { id: review.id }, data: parsed.data })
   return NextResponse.json({ id: updated.id })
 }
-

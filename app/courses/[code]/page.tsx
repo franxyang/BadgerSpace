@@ -2,7 +2,7 @@
 import { prisma } from '@/lib/prisma';
 import { ratingToUWLetter, average } from '@/lib/grades';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/lib/auth';
 import { shouldRedactReviews } from '@/lib/access';
 import WriteReview from './WriteReview';
 

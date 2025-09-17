@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { getServerSession } from 'next-auth'
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { authOptions } from '@/lib/auth'
 import { voteSchema } from '@/lib/validators'
 
 export async function POST(req: Request, { params }: { params: { id: string } }) {
@@ -24,4 +24,3 @@ export async function POST(req: Request, { params }: { params: { id: string } })
   await prisma.review.update({ where: { id: review.id }, data: { helpfulCount: agg._sum.value || 0 } })
   return NextResponse.json({ ok: true, helpfulCount: agg._sum.value || 0 })
 }
-
