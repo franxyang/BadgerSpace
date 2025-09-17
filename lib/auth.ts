@@ -33,18 +33,15 @@ export const authOptions: NextAuthOptions = {
     },
     async jwt({ token, user }) {
       if (user) {
-        // @ts-expect-error role exists on User in Prisma
-        token.role = user.role || 'USER'
+        (token as any).role = (user as any).role || 'USER'
       }
       return token
     },
     async session({ session, token }) {
       if (session.user) {
-        // @ts-expect-error augment
         session.user.role = (token as any).role || 'USER'
       }
       return session
     },
   },
 }
-
